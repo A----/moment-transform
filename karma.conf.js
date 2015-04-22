@@ -16,7 +16,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'node_modules/moment/min/moment.min.js',
-      'moment-transform.js',
+      'src/**/*.js',
       'test/**/*Spec.js'
     ],
 
