@@ -76,4 +76,15 @@ describe('moment-transform', function() {
     expect(testValue().transform("YYYYMMDD00:00:00", undefined, true)).not.toBeValidMoment();
     expect(testValue().transform("YYYYMM-01 HH+30:00", undefined, true)).not.toBeValidMoment();
   });
+
+  it('handles invalid moment objects', function() {
+    expect(moment.invalid().transform("YYYYMMDD00:00:00", undefined, true)).not.toBeValidMoment();
+  });
+
+  it('handles custom patterns', function() {
+    var testValue = function () { return moment('2000-10-05 04:30:20'); };
+    // w = Week of year
+    expect(testValue().transform("+1 +3", 'w HH', true)).toBeMoment('2000-10-12 07:30:20');
+    expect(testValue().transform("+1 +3", ['w HH'], true)).toBeMoment('2000-10-12 07:30:20');
+  });
 });
