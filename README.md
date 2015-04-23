@@ -20,7 +20,7 @@ var breakfirstTimeToday = moment().transform('07:30:00');
 // Optional pattern argument
 tomorrow = moment().transform('+01/MM/YYYY', 'DD/MM/YYYY');
 // Multiple patterns, take the first that fits
-midnightTonight = moment().transform('+01/MM/YYYY', ['DD/MM/YYYY', 'DD/MM/YYYY HH:mm:ss']);
+midnightTonight = moment().transform('+01/MM/YYYY 00:00:00', ['DD/MM/YYYY', 'DD/MM/YYYY HH:mm:ss']);
 
 // Optional strict argument
 tomorrow = moment().transform('+01MMYYYY', 'DD/MM/YYYY', false); // this works

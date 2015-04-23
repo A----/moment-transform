@@ -24,7 +24,10 @@ else {
   };
 
   var defaultPatterns = ['YYYY-MM-DD HH:mm:ss', 'YYYY-MM-DD', 'HH:mm:ss'],
-      tokenRE = /([A-Za-z])\1*/g;
+      tokenRE = /([A-Za-z])\1*/g,
+      unitMapping = {
+        "date": "days"
+      };
 
   // Try a pattern (String) on a value with the specified Moment object.
   // Returns the modified momentObject if it succeeded or null if it didn't.
@@ -37,7 +40,7 @@ else {
 
     // If not strict, set non-alpha characters optional.
     if (!strict) {
-      pattern = pattern.replace(/(\W)/g, '(?:$1)?');
+      pattern = pattern.replace(/(\\?\W)/g, '(?:$1)?');
     }
 
     // Extract tokens, e.g. "YYYY"
@@ -54,10 +57,10 @@ else {
 
         if (expandedTokenValue) {
           if (expandedTokenValue[1] === '+') {
-            momentObject.add(expandedTokenValue[2], token);
+            momentObject.add(expandedTokenValue[2], unitMapping[token] || token);
           }
           else if (expandedTokenValue[1] === '-') {
-            momentObject.subtract(expandedTokenValue[2], token);
+            momentObject.subtract(expandedTokenValue[2], unitMapping[token] || token);
           }
           else {
             momentObject.set(token, expandedTokenValue[2]);

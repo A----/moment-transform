@@ -45,6 +45,32 @@ describe('moment-transform', function() {
     expect(moment().transform).toBeDefined();
   });
 
+  it('runs README.md examples fine', function() {
+    var testValue = function () { return moment('2000-10-05 04:30:20'); };
+
+    var tomorrow = testValue().transform('YYYY-MM-+01');
+    var midnightTonight = testValue().transform('YYYY-MM-+01 00:00:00');
+    var breakfirstTimeToday = testValue().transform('07:30:00');
+
+    expect(tomorrow).toBeMoment('2000-10-06 04:30:20');
+    expect(midnightTonight).toBeMoment('2000-10-06 00:00:00');
+    expect(breakfirstTimeToday).toBeMoment('2000-10-05 07:30:00');
+
+    tomorrow = testValue().transform('+01/MM/YYYY', 'DD/MM/YYYY');
+    midnightTonight = testValue().transform('+01/MM/YYYY 00:00:00', ['DD/MM/YYYY', 'DD/MM/YYYY HH:mm:ss']);
+
+    expect(tomorrow).toBeMoment('2000-10-06 04:30:20');
+    expect(midnightTonight).toBeMoment('2000-10-06 00:00:00');
+
+    tomorrow = testValue().transform('+01MMYYYY', 'DD/MM/YYYY', false);
+    var invalid = testValue().transform('+01MMYYYY', 'DD/MM/YYYY', true);
+    breakfirstTimeToday = testValue().transform('07:30:00', undefined, true);
+
+    expect(tomorrow).toBeMoment('2000-10-06 04:30:20');
+    expect(invalid).not.toBeValidMoment('2000-10-06 04:30:20');
+    expect(midnightTonight).toBeMoment('2000-10-06 00:00:00');
+  });
+
   it('operates valid non-strict transformations', function() {
     var testValue = function () { return moment('2000-10-05 04:30:20'); };
 
