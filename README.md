@@ -12,8 +12,7 @@ Include it in your website/app (after moment if you don't use `require`).
 
 Then:
 
-```
-javascript
+```javascript
 var tomorrow = moment().transform('YYYY-MM-+01');
 var midnightTonight = moment().transform('YYYY-MM-+01 00:00:00');
 var breakfirstTimeToday = moment().transform('07:30:00');
