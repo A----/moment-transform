@@ -26,7 +26,7 @@ midnightTonight = moment().transform('+01/MM/YYYY', ['DD/MM/YYYY', 'DD/MM/YYYY H
 tomorrow = moment().transform('+01MMYYYY', 'DD/MM/YYYY', false); // this works
 invalid = moment().transform('+01MMYYYY', 'DD/MM/YYYY', true); // this will return an invalid date.
 invalid.isValid(); // false
-var breakfirstTimeToday = moment().transform('07:30:00', undefined, true); // with default patterns
+breakfirstTimeToday = moment().transform('07:30:00', undefined, true); // with default patterns
 ```
 
 ## Options
