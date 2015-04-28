@@ -11,12 +11,12 @@ describe('moment-transform', function() {
     toBeMoment: function(util, customEqualityTesters) {
       return {
         compare: function(actual, expected) {
-          var momentActual = moment(actual, 'YYYY-MM-DD HH:mm:ss'),
-              momentExpected = moment(expected,'YYYY-MM-DD HH:mm:ss');
+          var momentActual = moment(actual, 'YYYY-MM-DD HH:mm:ss.SSS'),
+              momentExpected = moment(expected,'YYYY-MM-DD HH:mm:ss.SSS');
 
           var result = {};
           result.pass = util.equals(momentActual, momentExpected, customEqualityTesters);
-          result.message = "Expected " + momentActual.format('YYYY-MM-DD HH:mm:ss') + " to be " + momentExpected.format('YYYY-MM-DD HH:mm:ss');
+          result.message = "Expected " + momentActual.format('YYYY-MM-DD HH:mm:ss.SSS') + " to be " + momentExpected.format('YYYY-MM-DD HH:mm:ss.SSS');
           return result;
         }
       }
@@ -24,11 +24,11 @@ describe('moment-transform', function() {
     toBeValidMoment: function(util, customEqualityTesters) {
       return {
         compare: function(actual) {
-          var momentActual = moment(actual, 'YYYY-MM-DD HH:mm:ss');
+          var momentActual = moment(actual, 'YYYY-MM-DD HH:mm:ss.SSS');
 
           var result = {};
           result.pass = momentActual.isValid();
-          result.message = "Expected " + momentActual.format('YYYY-MM-DD HH:mm:ss') + " to be valid";
+          result.message = "Expected " + momentActual.format('YYYY-MM-DD HH:mm:ss.SSS') + " to be valid";
           return result;
         }
       }
@@ -53,11 +53,11 @@ describe('moment-transform', function() {
     var breakfirstTimeToday = testValue().transform('07:30:00');
 
     expect(tomorrow).toBeMoment('2000-10-06 04:30:20');
-    expect(midnightTonight).toBeMoment('2000-10-06 00:00:00');
+    expect(midnightTonight).toBeMoment('2000-10-06 00:00:00.000');
     expect(breakfirstTimeToday).toBeMoment('2000-10-05 07:30:00');
 
     tomorrow = testValue().transform('+01/MM/YYYY', 'DD/MM/YYYY');
-    midnightTonight = testValue().transform('+01/MM/YYYY 00:00:00', ['DD/MM/YYYY', 'DD/MM/YYYY HH:mm:ss']);
+    midnightTonight = testValue().transform('+01/MM/YYYY 00:00:00.000', ['DD/MM/YYYY', 'DD/MM/YYYY HH:mm:ss.SSS']);
 
     expect(tomorrow).toBeMoment('2000-10-06 04:30:20');
     expect(midnightTonight).toBeMoment('2000-10-06 00:00:00');
@@ -101,6 +101,11 @@ describe('moment-transform', function() {
 
     expect(testValue().transform("YYYYMMDD00:00:00", undefined, true)).not.toBeValidMoment();
     expect(testValue().transform("YYYYMM-01 HH+30:00", undefined, true)).not.toBeValidMoment();
+  });
+
+  it('handles microseconds', function() {
+    var testValue = function () { return moment('2000-10-05 04:30:20.153'); };
+        expect(testValue().transform("YYYY-MM-DD 00:00:00.+7", undefined, true)).toBeMoment('2000-10-05 00:00:00.160');
   });
 
   it('handles invalid moment objects', function() {

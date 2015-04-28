@@ -14,13 +14,13 @@ Then:
 
 ```javascript
 var tomorrow = moment().transform('YYYY-MM-+01');
-var midnightTonight = moment().transform('YYYY-MM-+01 00:00:00');
+var midnightTonight = moment().transform('YYYY-MM-+01 00:00:00.000');
 var breakfirstTimeToday = moment().transform('07:30:00');
 
 // Optional pattern argument
 tomorrow = moment().transform('+01/MM/YYYY', 'DD/MM/YYYY');
 // Multiple patterns, take the first that fits
-midnightTonight = moment().transform('+01/MM/YYYY 00:00:00', ['DD/MM/YYYY', 'DD/MM/YYYY HH:mm:ss']);
+midnightTonight = moment().transform('+01/MM/YYYY 00:00:00.000', ['DD/MM/YYYY', 'DD/MM/YYYY HH:mm:ss.SSS']);
 
 // Optional strict argument
 tomorrow = moment().transform('+01MMYYYY', 'DD/MM/YYYY', false); // this works
