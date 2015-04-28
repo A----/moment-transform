@@ -11,6 +11,7 @@ module.exports = function (grunt) {
 
     jshint: {
       options: {
+        bitwise: true,
         curly: true,
         globals: {
           require: true,
