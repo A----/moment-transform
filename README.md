@@ -33,7 +33,7 @@ breakfirstTimeToday = moment().transform('07:30:00', undefined, true); // with d
 
 `transform()` takes up to three arguments:
 * `value`: value to be checked against the pattern,
-* `patterns` (optional): a string or an array of strings. Check [`format()` documentation](http://momentjs.com/docs/#/displaying/format/) for syntax. Default value is `['YYYY-MM-DD HH:mm:ss', 'YYYY-MM-DD', 'HH:mm:ss']`.
+* `patterns` (optional): a string or an array of strings. Check [`format()` documentation](http://momentjs.com/docs/#/displaying/format/) for syntax. Default value is `['YYYY-MM-DD HH:mm:ss.SSS', 'YYYY-MM-DD HH:mm:ss', 'YYYY-MM-DD', 'HH:mm:ss.SSS', 'HH:mm:ss']`.
 * `strict` (optional): non-alphabetic characters in patterns are not mandatory when not strict. Default is `false`.
 
 ## Contributing
