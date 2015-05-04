@@ -83,7 +83,15 @@ else {
             momentObject.subtract(expandedTokenValue[2], getUnit(token, unitMappingAddSubtract, unitMapping));
           }
           else {
-            momentObject.set(getUnit(token, unitMappingSet, unitMapping), expandedTokenValue[2]);
+            var unit = getUnit(token, unitMappingSet, unitMapping),
+                number;
+            if (unit === 'M') {
+              number = expandedTokenValue[2] - 1;
+            }
+            else {
+              number = expandedTokenValue[2];
+            }
+            momentObject.set(unit, number);
           }
         }
       }

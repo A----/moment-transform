@@ -108,6 +108,11 @@ describe('moment-transform', function() {
         expect(testValue().transform("YYYY-MM-DD 00:00:00.+7", undefined, true)).toBeMoment('2000-10-05 00:00:00.160');
   });
 
+  it('handles months', function() {
+    var testValue = function () { return moment('2000-10-05 04:30:20'); };
+        expect(testValue().transform("YYYY-01-DD 00:00:00", undefined, true)).toBeMoment('2000-01-05 00:00:00');
+  });
+
   it('handles invalid moment objects', function() {
     expect(moment.invalid().transform("YYYYMMDD00:00:00", undefined, true)).not.toBeValidMoment();
   });
