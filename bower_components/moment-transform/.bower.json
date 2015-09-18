@@ -1,0 +1,40 @@
+{
+  "name": "moment-transform",
+  "main": "moment-transform.js",
+  "homepage": "https://github.com/A----/moment-transform",
+  "authors": [
+    "A---- <A----@users.noreply.github.com>"
+  ],
+  "description": "A plugin for Moment.js that allows date transformation from a pattern",
+  "moduleType": [
+    "amd",
+    "node"
+  ],
+  "keywords": [
+    "moment",
+    "plugin",
+    "date",
+    "transformation"
+  ],
+  "license": "Public Domain",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "moment": "~2.10.2"
+  },
+  "_release": "fb03a2d708",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "fb03a2d708d077f392424af0155633f894f58c1a"
+  },
+  "_source": "https://github.com/A----/moment-transform.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/A----/moment-transform.git",
+  "_direct": true
+}

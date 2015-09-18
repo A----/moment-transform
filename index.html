@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Moment.js Transform plugin</title>
+
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" type="text/css" href="bower_components/semantic/dist/semantic.min.css" />
+  <link rel="stylesheet" type="text/css" href="main.css">
+
+  <!--[if lt IE 9]>
+  <script src="bower_components/respond/dest/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body id="top">
+
+
+<div class="ui inverted segment">
+  <div class="ui text container">
+    <div class="ui stackable divided grid">
+      <div class="ui ten wide column">
+        <h1 class="ui inverted header">Moment.js Transform</h1>
+        <h2>A plugin for <a href="http://momentjs.com">moment.js</a> that lets you manipulate dates through patterns.</h2>
+      </div>
+      <div class="ui six wide column">
+        <a href="#installation" class="ui fluid labeled icon primary button">
+          <i class="icon download"></i>
+          Download
+        </a>
+        <a href="https://github.com/A----/moment-transform" class="ui fluid labeled icon button">
+          <i class="icon github"></i>
+          GitHub Project
+        </a>
+
+        <small class="ui aligned right">Current version: v1.0.0</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui text container">
+
+  <div id="intro">
+    <p>
+      Wouldn't it be useful to manipulate a date using patterns? Don't you find it annoying to always have to
+      set hours, minutes, seconds and milliseconds to zero to drop the time part of a date? Want to set the configuration
+      of one of your component to <abbr title="Year-to-Date">YtD</abbr> or -30 days using a simple string?
+    </p>
+
+    <p>
+      Those are the use cases this plugin aims to answer.
+    </p>
+  </div>
+
+  <div id="demo" class="ui segment raised">
+    <h3 class="ui header">Demo</h3>
+
+    <div class="ui two column divided grid">
+      <div class="five wide center aligned column">
+        <div class="ui vertical buttons">
+          <button class="ui button example" data-value="YYYY-MM-DD 00:00:00.000">Drop time</button>
+          <button class="ui button example" data-value="YYYY-01-01 00:00:00.000"><abbr title="Year-to-Date">YtD</abbr></button>
+          <button class="ui button example" data-value="YYYY-MM-01 00:00:00.000"><abbr title="Month-to-Date">MtD</abbr></button>
+          <button class="ui button example" data-value="YYYY-MM--30 00:00:00.000">-30 days</button>
+          <button class="ui button example" data-value="YYYY-MM-DD 07:30:00.000">Breakfast time!</button>
+        </div>
+      </div>
+      <div class="eleven wide column demo">
+        <p>Current time is: <strong class="current-time"></strong></p>
+
+        <p>
+          <code>moment().transform("</code><span class="ui small input"><input class="value" type="text" /><code></span>")</code>
+        </p>
+
+        <p>Transformed time is: <strong class="new-time"></strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="installation">
+    <h3 class="ui header">Installation</h3>
+
+    <p>First, download it:</p>
+
+    <ul>
+      <li>using <a href="http://bower.io/">Bower</a>: <code>bower install moment-transform</code></li>
+      <li>on the release <a href="https://github.com/A----/moment-transform/releases">release page</a></a>
+      <li>by cloning the <a href="https://github.com/A----/moment-transform">GitHub repository</a>
+    </ul>
+
+    <p>Then add the plugin after the <a href="http://momentjs.com">moment.js</a> library:</p>
+
+    <pre>
+&lt;script src="./lib/moment/moment.min.js"&gt;&lt;/script&gt;
+&lt;script src="./lib/moment-transform/moment-transform.min.js"&gt;&lt;/script&gt;
+    </pre>
+
+  </div>
+
+  <div id="usage">
+    <h3 class="ui header">Usage</h3>
+
+    <p>This plugin provides one additional method to all <code>Moment</code> instances. Its signature is as follows:</p>
+
+    <pre>
+momentInstance.transform(value[, patterns][, strict])
+    </pre>
+
+    <p>Where:</p>
+    <ul>
+      <li><code>value</code> is a string that you can expect to be matched by the pattern.</li>
+      <li><code>patterns</code> is an optional parameter. It can either be a string or an array of strings. Those patterns will
+        sequentially be tried on the value. The first one that matches (does not return an invalid date)
+        will be selected. Default value is <code>['YYYY-MM-DD HH:mm:ss.SSS', 'YYYY-MM-DD HH:mm:ss', 'YYYY-MM-DD',
+        'HH:mm:ss.SSS', 'HH:mm:ss']</code>.</li>
+      <li><code>strict</code> is an optional boolean parameter. If set to <code>false</code>, any character in a pattern that
+        is not a letter is optional.</li>
+    </ul>
+
+    <p>In a pattern, each group of the same letter (i.e. <code>YYYY</code>) will match <code>[+-]?\d+</code>. If no sign
+    is present, it will set the value of the corresponding part of the date (i.e. year). If there is a sign, it will add or
+    substract the value to the corresponding part of the date.</p>
+
+    <p>More information on the accepted pattern can be found in the
+    <a href="http://momentjs.com/docs/#/displaying/format/"><code>format()</code></a> documentation.</p>
+
+    <p>In everycase, the method will return a new <code>Moment</code> instance. If a pattern has been matched, it will
+    return the new date. If none could be match or if the <code>Moment</code> instance was already invalid, it will
+    return an invalid date. This can easily be checked by using the
+    <a href="http://momentjs.com/docs/#/parsing/is-valid/"><code>isValid()</code></a> method.</p>
+  </div>
+
+</div>
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/moment/min/moment.min.js"></script>
+<script src="bower_components/moment-transform/dist/moment-transform.min.js"></script>
+
+
+<script type="application/javascript">
+  var displayFormat = 'YYYY-MM-DD HH:mm:ss.SSS';
+
+  var updateDemoFields = function (demo, value) {
+      var now = moment();
+      var then = moment().transform(value);
+
+      $('.current-time', demo).text(now.format(displayFormat));
+      $('.new-time').text(then.format(displayFormat));
+    };
+
+  $('.demo').each(function(demo) {
+    var changeHandler = function() {
+        updateDemoFields(demo, $(this).val());
+      };
+
+    $('.value', demo)
+      .keypress(changeHandler)
+      .change(changeHandler);
+
+    $('.example', demo)
+      .click(function () {
+        $('.value', demo)
+          .val($(this).data('value'))
+          .change();
+      })
+      .first()
+      .click();
+
+  });
+
+</script>
+
+
+</body>
+</html>
