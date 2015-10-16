@@ -40,6 +40,6 @@ breakfirstTimeToday = moment().transform('07:30:00', undefined, true); // with d
 
 Fork the repository and do a `npm install`.
 
-You can check your code is correct my doing a `grunt test`.
+You can check your code is correct by doing a `grunt test`.
 
 When you're done, do a `grunt build`.
