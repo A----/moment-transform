@@ -2,7 +2,7 @@
   "name": "moment-transform",
   "version": "1.0.0",
   "description": "A plugin for Moment.js that allows date transformation from a pattern",
-  "main": "moment-transform.js",
+  "main": "./dist/moment-transform.js",
   "scripts": {
     "test": "grunt test"
   },
