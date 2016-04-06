@@ -1,6 +1,6 @@
 {
   "name": "moment-transform",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A plugin for Moment.js that allows date transformation from a pattern",
   "main": "./dist/moment-transform.js",
   "scripts": {
